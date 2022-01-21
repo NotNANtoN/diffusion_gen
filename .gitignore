@@ -1,3 +1,10 @@
+# cloned repos
+ResizeRight/
+guided-diffusion/
+latent-diffusion/
+out_diffusion/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
