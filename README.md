@@ -1,6 +1,47 @@
-# diffusion_gen
+# Diffusion Gen
 
-## Tutorial
+An adapation of DiscoDiffusion (https://colab.research.google.com/drive/1sHfRn5Y0YKYKi1k-ifUSBFRNJ8_1sa39#scrollTo=BGBzhk3dpcGO) to run locally, to improve code quality and to speed it up. So far the code was just cleaned up a bit and the lpips network initialization was removed when only an input text is used.
+
+With defaults settings it takes 07:46 minutes on an RTX 2080TI, 19:01 minutes on a GTX 1080 TI, and 17:01 minutes on a Titan XP to generate images like these:
+
+**The meaning of life**
+![meaning(0)_0](https://user-images.githubusercontent.com/19983153/150617587-0b1396bd-339f-4867-8a4a-c15bb75fd71a.png)
+
+
+**The meaning of life by Picasso**
+![meaning(2)_0](https://user-images.githubusercontent.com/19983153/150617599-4ceb2896-9aa1-4497-b7ad-80c488f68938.png)
+
+
+**The meaning of life by Greg Rutkowski**
+![meaning_rutkowski](https://user-images.githubusercontent.com/19983153/150616859-0630e090-d737-4ced-9893-4a2c9937a949.png)
+
+**Consciousness**
+![out_image(0)_0](https://user-images.githubusercontent.com/19983153/150617545-1048b160-084c-4854-adc3-6afb13731fdf.png)
+
+
+
+<!-- **Looking back** -->
+<!-- ![looking_back](https://user-images.githubusercontent.com/19983153/150616381-d0a9f581-3fc7-47a7-86b2-2f415a1d847d.png) -->
+
+*forgot the prompt but it was about pikachu staring at a tumultous sea of blood, adapted from the DiscoDiffusion original notebook*
+![Screenshot from 2022-01-21 15-35-09](https://user-images.githubusercontent.com/19983153/150616643-54436dbc-1e38-4127-b0dd-f0097470ae0f.png)
+
+
+## Setup
+
+First run `ipython3 diffuse.py --setup 1` to set everything up and to clone the repositories. IMPORTANT: you need to use ipython instead of python because I was lazy and all git clone etc are run via ipython
+
+At the moment you can only set a single text as a target but this should be improved in the future. Only runs with GPU support atm.
+
+Use it like this:
+
+```
+python3 diffuse.py --text "The meaning of life --gpu [Optional: device number of GPU to run this on] --root_path [Optional: path to output folder, default is "out_diffusion" in local dir]
+```
+
+you can also set: `--out_name [Optional: set naming in your root_path according to this for better overview]` and `--sharpen_preset [Optional: set it to any of ('Off', 'Faster', 'Fast', 'Slow', 'Very Slow') to modify the sharpening process at the end. Default: Off]`
+
+## Tutorial (copypasta from old colab notebook)
 
 ### **Diffusion settings**
  ---
