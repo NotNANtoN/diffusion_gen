@@ -25,6 +25,10 @@ parser.add_argument("--gpu", default="0", type=str)
 parser.add_argument("--text", default="", type=str)
 parser.add_argument("--root_path", default="out_diffusion")
 parser.add_argument("--setup", default=False, type=bool)
+parser.add_argument("--out_name", default="out_image", type=str)
+parser.add_argument("--sharpen_preset", default="Off", type=str, choices=['Off', 'Faster', 'Fast', 'Slow', 'Very Slow'])
+
+
 argparse_args = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = argparse_args.gpu
 
@@ -37,8 +41,6 @@ from perlin import create_perlin_noise, regen_perlin
 
 def alpha_sigma_to_t(alpha, sigma):
     return torch.atan2(sigma, alpha) * 2 / math.pi
-
-
 
 
 
@@ -122,7 +124,6 @@ if argparse_args.setup:
     get_ipython().run_line_magic('cd', "'latent-diffusion'")
 sys.path.append("latent-diffusion")
 from ldm.util import instantiate_from_config
-from ldm.modules.diffusionmodules.util import make_ddim_sampling_parameters, make_ddim_timesteps, noise_like
 # from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.util import ismap
 if argparse_args.setup:
@@ -1117,7 +1118,7 @@ normalize = T.Normalize(mean=[0.48145466, 0.4578275, 0.40821073], std=[0.2686295
 
 
 #@markdown ####**Basic Settings:**
-batch_name = 'TreeOfLife' #@param{type: 'string'}
+batch_name = argparse_args.out_name #@param{type: 'string'}
 steps = 250 #@param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
 width_height = [1280, 768]#@param{type: 'raw'}
 clip_guidance_scale = 5000 #@param{type: 'number'}
@@ -1318,6 +1319,7 @@ def get_inbetweens(key_frames, integer=False):
         return key_frame_series.astype(int)
     return key_frame_series
 
+
 def split_prompts(prompts):
   prompt_series = pd.Series([np.nan for a in range(max_frames)])
   for i, prompt in prompts.items():
@@ -1325,6 +1327,7 @@ def split_prompts(prompts):
   # prompt_series = prompt_series.astype(str)
   prompt_series = prompt_series.ffill().bfill()
   return prompt_series
+
 
 if key_frames:
     try:
@@ -1425,7 +1428,7 @@ if intermediate_saves and intermediates_in_subfolder is True:
 
 #@markdown ####**SuperRes Sharpening:**
 #@markdown *Sharpen each image using latent-diffusion. Does not run in animation mode. `keep_unsharp` will save both versions.*
-sharpen_preset = 'Fast' #@param ['Off', 'Faster', 'Fast', 'Slow', 'Very Slow']
+sharpen_preset = argparse_args.sharpen_preset #@param ['Off', 'Faster', 'Fast', 'Slow', 'Very Slow']
 keep_unsharp = True #@param{type: 'boolean'}
 
 if sharpen_preset != 'Off' and keep_unsharp is True:

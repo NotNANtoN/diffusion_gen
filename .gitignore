@@ -4,6 +4,8 @@ guided-diffusion/
 latent-diffusion/
 out_diffusion/
 
+# files
+*.jpg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
