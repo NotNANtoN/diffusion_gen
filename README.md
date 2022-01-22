@@ -14,6 +14,8 @@ Use it like this:
 python3 diffuse.py --text "The meaning of life --gpu [Optional: device number of GPU to run this on] --root_path [Optional: path to output folder, default is "out_diffusion" in local dir]
 ```
 
+you can also set: `--out_name [Optional: set naming in your root_path according to this for better overview]` and `--sharpen_preset [Optional: set it to any of ('Off', 'Faster', 'Fast', 'Slow', 'Very Slow') to modify the sharpening process at the end. Default: Fast]`
+
 ## Tutorial (copypasta from old colab notebook)
 
 ### **Diffusion settings**
