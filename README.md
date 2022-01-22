@@ -1,6 +1,20 @@
 # diffusion_gen
 
-## Tutorial
+An adapation of DiscoDiffusion (https://colab.research.google.com/drive/1sHfRn5Y0YKYKi1k-ifUSBFRNJ8_1sa39#scrollTo=BGBzhk3dpcGO) to run locally, to improve code quality and to speed it up.
+
+## Setup
+
+First run `ipython3 diffuse.py --setup 1` to set everything up and to clone the repositories. IMPORTANT: you need to use ipython instead of python because I was lazy and all git clone etc are run via ipython
+
+At the moment you can only set a single text as a target but this should be improved in the future. Only runs with GPU support atm.
+
+Use it like this:
+
+```
+python3 diffuse.py --text "The meaning of life --gpu [Optional: device number of GPU to run this on] --root_path [Optional: path to output folder, default is "out_diffusion" in local dir]
+```
+
+## Tutorial (copypasta from old colab notebook)
 
 ### **Diffusion settings**
  ---
