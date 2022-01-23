@@ -32,6 +32,17 @@ os.environ["CUDA_VISIBLE_DEVICES"] = argparse_args.gpu
 
 if argparse_args.setup:
     get_ipython().system('git clone https://github.com/CompVis/latent-diffusion.git')
+    get_ipython().system('git clone https://github.com/openai/CLIP')
+    get_ipython().system('pip3 install -e ./CLIP')
+    get_ipython().system('git clone https://github.com/assafshocher/ResizeRight.git')
+    get_ipython().system('git clone https://github.com/crowsonkb/guided-diffusion')
+    
+    get_ipython().system('python3 -m pip install -e ./guided-diffusion')
+    get_ipython().system('python3 -m pip install lpips datetime timm')
+    get_ipython().system('apt install imagemagick')
+
+# sys.path.append('./SLIP')
+sys.path.append('./ResizeRight')
 sys.path.append("latent-diffusion")
 
 from secondary_diffusion import SecondaryDiffusionImageNet, SecondaryDiffusionImageNet2 
@@ -60,19 +71,6 @@ model_256_downloaded = False
 model_512_downloaded = False
 model_secondary_downloaded = False
 
-if argparse_args.setup:
-    #!git clone https://github.com/openai/CLIP
-    # !git clone https://github.com/facebookresearch/SLIP.git
-    get_ipython().system('git clone https://github.com/crowsonkb/guided-diffusion')
-    get_ipython().system('git clone https://github.com/assafshocher/ResizeRight.git')
-    #!pip install -e ./CLIP
-    get_ipython().system('python3 -m pip install -e ./guided-diffusion')
-    get_ipython().system('python3 -m pip install lpips datetime timm')
-    get_ipython().system('apt install imagemagick')
-
-
-# sys.path.append('./SLIP')
-sys.path.append('./ResizeRight')
 from functools import partial
 import cv2
 import pandas as pd
