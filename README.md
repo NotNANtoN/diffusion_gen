@@ -29,7 +29,7 @@ With defaults settings it takes 07:46 minutes on an RTX 2080TI, 19:01 minutes on
 
 ## Setup
 
-First run `ipython3 diffuse.py --setup 1` to set everything up and to clone the repositories. IMPORTANT: you need to use ipython instead of python because I was lazy and all git clone etc are run via ipython
+First run `ipython3 diffuse.py` to set everything up and to clone the repositories. IMPORTANT: you need to use ipython instead of python because I was lazy and all git clone etc are run via ipython
 
 At the moment you can only set a single text as a target but this should be improved in the future. Only runs with GPU support atm.
 
