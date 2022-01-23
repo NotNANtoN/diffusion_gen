@@ -1,18 +1,3 @@
-
-# 
-# ..
-# 
-# **Model settings**
-# ---
-# 
-# Setting | Description | Default
-# --- | --- | ---
-# **Diffusion:**
-# `timestep_respacing`  | Modify this value to decrease the number of timesteps. | ddim100
-# `diffusion_steps` || 1000
-# **Diffusion:**
-# `clip_models`  | Models of CLIP to load. Typically the more, the better but they all come at a hefty VRAM cost. | ViT-B/32, ViT-B/16, RN50x4
-
 # # 1. Set Up
 import os
 from os import path
@@ -33,8 +18,9 @@ parser.add_argument("--root_path", default="out_diffusion")
 parser.add_argument("--setup", default=False, type=bool)
 parser.add_argument("--out_name", default="out_image", type=str)
 parser.add_argument("--sharpen_preset", default="Off", type=str, choices=['Off', 'Faster', 'Fast', 'Slow', 'Very Slow'])
-        
-    
+parser.add_argument("--width", default=1280, type=int)
+parser.add_argument("--height", default=768, type=int)
+
     
 if run_from_ipython():
     argparse_args = parser.parse_args({})
@@ -44,6 +30,9 @@ else:
 # read args to determine GPU before importing torch and befor importing other files (torch is also imported in other files)
 os.environ["CUDA_VISIBLE_DEVICES"] = argparse_args.gpu
 
+if argparse_args.setup:
+    get_ipython().system('git clone https://github.com/CompVis/latent-diffusion.git')
+sys.path.append("latent-diffusion")
 
 from secondary_diffusion import SecondaryDiffusionImageNet, SecondaryDiffusionImageNet2 
 from ddim_sampler import DDIMSampler
@@ -117,6 +106,8 @@ import random
 from ipywidgets import Output
 import hashlib
 
+
+    
 if argparse_args.setup:
     #SuperRes
     get_ipython().system('git clone https://github.com/CompVis/latent-diffusion.git')
@@ -1126,13 +1117,11 @@ normalize = T.Normalize(mean=[0.48145466, 0.4578275, 0.40821073], std=[0.2686295
 
 # # 4. Settings
 
-# In[12]:
-
 
 #@markdown ####**Basic Settings:**
 batch_name = argparse_args.out_name #@param{type: 'string'}
 steps = 250 #@param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
-width_height = [1280, 768]#@param{type: 'raw'}
+width_height = [argparse_args.width, argparse_args.height]#@param{type: 'raw'}
 clip_guidance_scale = 5000 #@param{type: 'number'}
 tv_scale =  0#@param{type: 'number'}
 range_scale =   150#@param{type: 'number'}

@@ -2,8 +2,9 @@
 
 An adapation of DiscoDiffusion (https://colab.research.google.com/drive/1sHfRn5Y0YKYKi1k-ifUSBFRNJ8_1sa39#scrollTo=BGBzhk3dpcGO) to run locally, to improve code quality and to speed it up. So far the code was just cleaned up a bit and the lpips network initialization was removed when only an input text is used.
 
-Around 11GB GPU VRAM are needed for the current default settings.
+Around 11GB GPU VRAM are needed for the current default settings of `--width` 1280 and `--height` 768. Decreasing the image size is the easiest way to make it fit in smaler GPUs.
 With defaults settings it takes 07:46 minutes on an RTX 2080TI, 19:01 minutes on a GTX 1080 TI, and 17:01 minutes on a Titan XP to generate images like these:
+
 
 **The meaning of life**
 ![meaning(0)_0](https://user-images.githubusercontent.com/19983153/150617587-0b1396bd-339f-4867-8a4a-c15bb75fd71a.png)
@@ -18,11 +19,6 @@ With defaults settings it takes 07:46 minutes on an RTX 2080TI, 19:01 minutes on
 
 **Consciousness**
 ![out_image(0)_0](https://user-images.githubusercontent.com/19983153/150617545-1048b160-084c-4854-adc3-6afb13731fdf.png)
-
-
-
-<!-- **Looking back** -->
-<!-- ![looking_back](https://user-images.githubusercontent.com/19983153/150616381-d0a9f581-3fc7-47a7-86b2-2f415a1d847d.png) -->
 
 *forgot the prompt but it was about pikachu staring at a tumultous sea of blood, adapted from the DiscoDiffusion original notebook*
 ![Screenshot from 2022-01-21 15-35-09](https://user-images.githubusercontent.com/19983153/150616643-54436dbc-1e38-4127-b0dd-f0097470ae0f.png)
