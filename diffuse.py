@@ -512,8 +512,8 @@ def do_run():
                       image = TF.to_pil_image(image.add(1).div(2).clamp(0, 1))
                       if j % args.display_rate == 0 or cur_t == -1:
                         image.save('progress.jpg', subsampling=0, quality=95)
-                        display.clear_output(wait=True)
-                        display.display(display.Image('progress.png'))
+                        #display.clear_output(wait=True)
+                        #display.display(display.Image('progress.png'))
                       if args.steps_per_checkpoint is not None:
                         if j % args.steps_per_checkpoint == 0 and j > 0:
                           if args.intermediates_in_subfolder is True:

@@ -3,6 +3,7 @@ ResizeRight/
 guided-diffusion/
 latent-diffusion/
 out_diffusion/
+taming-transformers/
 
 # files
 *.jpg
