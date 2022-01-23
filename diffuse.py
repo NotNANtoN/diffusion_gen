@@ -17,9 +17,15 @@
 import os
 from os import path
 import sys
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 
-# read args to determine GPU before importing torch (is also imported in other files)
+def run_from_ipython():
+    try:
+        __IPYTHON__
+        return True
+    except NameError:
+        return False
+        
 parser = ArgumentParser()
 parser.add_argument("--gpu", default="0", type=str)
 parser.add_argument("--text", default="", type=str)
@@ -27,9 +33,15 @@ parser.add_argument("--root_path", default="out_diffusion")
 parser.add_argument("--setup", default=False, type=bool)
 parser.add_argument("--out_name", default="out_image", type=str)
 parser.add_argument("--sharpen_preset", default="Off", type=str, choices=['Off', 'Faster', 'Fast', 'Slow', 'Very Slow'])
-
-
-argparse_args = parser.parse_args()
+        
+    
+    
+if run_from_ipython():
+    argparse_args = parser.parse_args({})
+    argparse_args.setup = 1
+else:
+    argparse_args = parser.parse_args()
+# read args to determine GPU before importing torch and befor importing other files (torch is also imported in other files)
 os.environ["CUDA_VISIBLE_DEVICES"] = argparse_args.gpu
 
 
