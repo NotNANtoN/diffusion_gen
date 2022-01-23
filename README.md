@@ -2,6 +2,7 @@
 
 An adapation of DiscoDiffusion (https://colab.research.google.com/drive/1sHfRn5Y0YKYKi1k-ifUSBFRNJ8_1sa39#scrollTo=BGBzhk3dpcGO) to run locally, to improve code quality and to speed it up. So far the code was just cleaned up a bit and the lpips network initialization was removed when only an input text is used.
 
+Around 11GB GPU VRAM are needed for the current default settings.
 With defaults settings it takes 07:46 minutes on an RTX 2080TI, 19:01 minutes on a GTX 1080 TI, and 17:01 minutes on a Titan XP to generate images like these:
 
 **The meaning of life**
