@@ -4,6 +4,7 @@ guided-diffusion/
 latent-diffusion/
 out_diffusion/
 taming-transformers/
+CLIP/
 
 # files
 *.jpg
