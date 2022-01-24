@@ -121,9 +121,9 @@ sys.path.append('./taming-transformers')
 from taming.models import vqgan # checking correct import from taming
 from torchvision.datasets.utils import download_url
 
+sys.path.append("./latent-diffusion")
 if argparse_args.setup:
     get_ipython().run_line_magic('cd', "latent-diffusion")
-sys.path.append("./latent-diffusion")
 from ldm.util import instantiate_from_config
 # from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.util import ismap
