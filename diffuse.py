@@ -31,15 +31,25 @@ else:
 os.environ["CUDA_VISIBLE_DEVICES"] = argparse_args.gpu
 
 if argparse_args.setup:
+    get_ipython().system('python3 -m pip install ipywidgets omegaconf>=2.0.0 pytorch-lightning>=1.0.8 torch-fidelity einops wandb')
+    get_ipython().system('python3 -m pip install lpips datetime timm')
+    
     get_ipython().system('git clone https://github.com/CompVis/latent-diffusion.git')
     get_ipython().system('git clone https://github.com/openai/CLIP')
     get_ipython().system('pip3 install -e ./CLIP')
     get_ipython().system('git clone https://github.com/assafshocher/ResizeRight.git')
     get_ipython().system('git clone https://github.com/crowsonkb/guided-diffusion')
-    
     get_ipython().system('python3 -m pip install -e ./guided-diffusion')
-    get_ipython().system('python3 -m pip install lpips datetime timm')
+    
     get_ipython().system('apt install imagemagick')
+    
+    #SuperRes
+    get_ipython().system('git clone https://github.com/CompVis/latent-diffusion.git')
+    get_ipython().system('git clone https://github.com/CompVis/taming-transformers')
+    get_ipython().system('pip install -e ./taming-transformers')
+    
+    
+
 
 # sys.path.append('./SLIP')
 sys.path.append('./ResizeRight')
@@ -106,12 +116,6 @@ import hashlib
 
 
     
-if argparse_args.setup:
-    #SuperRes
-    get_ipython().system('git clone https://github.com/CompVis/latent-diffusion.git')
-    get_ipython().system('git clone https://github.com/CompVis/taming-transformers')
-    get_ipython().system('pip install -e ./taming-transformers')
-    get_ipython().system('pip install ipywidgets omegaconf>=2.0.0 pytorch-lightning>=1.0.8 torch-fidelity einops wandb')
 
 #SuperRes
 import ipywidgets as widgets
