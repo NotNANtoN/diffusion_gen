@@ -122,8 +122,8 @@ from taming.models import vqgan # checking correct import from taming
 from torchvision.datasets.utils import download_url
 
 if argparse_args.setup:
-    get_ipython().run_line_magic('cd', "'latent-diffusion'")
-sys.path.append("latent-diffusion")
+    get_ipython().run_line_magic('cd', "latent-diffusion")
+sys.path.append("./latent-diffusion")
 from ldm.util import instantiate_from_config
 # from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.util import ismap
@@ -603,14 +603,14 @@ def download_models():
     url_conf = 'https://heibox.uni-heidelberg.de/f/31a76b13ea27482981b4/?dl=1'
     url_ckpt = 'https://heibox.uni-heidelberg.de/f/578df07c8fc04ffbadf3/?dl=1'
 
-    path_conf = f'{model_path}/superres/project.yaml'
-    path_ckpt = f'{model_path}/superres/last.ckpt'
+    path_conf = f'{model_path}/superres/'
+    path_ckpt = f'{model_path}/superres/'
 
-    download_url(url_conf, path_conf)
-    download_url(url_ckpt, path_ckpt)
+    download_url(url_conf, path_conf, 'project.yaml')
+    download_url(url_ckpt, path_ckpt, 'last.ckpt')
 
-    path_conf = path_conf + '/?dl=1' # fix it
-    path_ckpt = path_ckpt + '/?dl=1' # fix it
+    path_conf = path_conf + 'project.yaml' # fix it
+    path_ckpt = path_ckpt + 'last.ckpt' # fix it
     return path_conf, path_ckpt
    
 
@@ -974,40 +974,40 @@ if diffusion_model == '256x256_diffusion_uncond':
     print('Checking 256 Diffusion File')
     with open(model_256_path,"rb") as f:
         bytes = f.read() 
-        hash = hashlib.sha256(bytes).hexdigest();
+        hash = hashlib.sha256(bytes).hexdigest()
     if hash == model_256_SHA:
       print('256 Model SHA matches')
       model_256_downloaded = True
     else: 
       print("256 Model SHA doesn't match, redownloading...")
       if argparse_args.setup:
-          get_ipython().system('wget --continue {model_256_link} -P {model_path}')
+          download_url(model_256_link, model_path, '256x256_diffusion_uncond.pt')
       model_256_downloaded = True
   elif os.path.exists(model_256_path) and not check_model_SHA or model_256_downloaded == True:
     print('256 Model already downloaded, check check_model_SHA if the file is corrupt')
   else:  
     if argparse_args.setup:
-        get_ipython().system('wget --continue {model_256_link} -P {model_path}')
+        download_url(model_256_link, model_path, '256x256_diffusion_uncond.pt')
     model_256_downloaded = True
 elif diffusion_model == '512x512_diffusion_uncond_finetune_008100':
   if os.path.exists(model_512_path) and check_model_SHA:
     print('Checking 512 Diffusion File')
     with open(model_512_path,"rb") as f:
         bytes = f.read() 
-        hash = hashlib.sha256(bytes).hexdigest();
+        hash = hashlib.sha256(bytes).hexdigest()
     if hash == model_512_SHA:
       print('512 Model SHA matches')
       model_512_downloaded = True
     else:  
       print("512 Model SHA doesn't match, redownloading...")
       if argparse_args.setup:
-          get_ipython().system('wget --continue {model_512_link} -P {model_path}')
+          download_url(model_512_link, model_path, '512x512_diffusion_uncond_finetune_008100.pt')
       model_512_downloaded = True
   elif os.path.exists(model_512_path) and not check_model_SHA or model_512_downloaded == True:
     print('512 Model already downloaded, check check_model_SHA if the file is corrupt')
   else:  
     if argparse_args.setup:
-        get_ipython().system('wget --continue {model_512_link} -P {model_path}')
+        download_url(model_512_link, model_path, '512x512_diffusion_uncond_finetune_008100.pt')
     model_512_downloaded = True
 
 
@@ -1017,20 +1017,20 @@ if use_secondary_model == True:
     print('Checking Secondary Diffusion File')
     with open(model_secondary_path,"rb") as f:
         bytes = f.read() 
-        hash = hashlib.sha256(bytes).hexdigest();
+        hash = hashlib.sha256(bytes).hexdigest()
     if hash == model_secondary_SHA:
       print('Secondary Model SHA matches')
       model_secondary_downloaded = True
     else:  
       print("Secondary Model SHA doesn't match, redownloading...")
       if argparse_args.setup:
-          get_ipython().system('wget --continue {model_secondary_link} -P {model_path}')
+          download_url(model_secondary_link, model_path, 'secondary_model_imagenet_2.pth')
       model_secondary_downloaded = True
   elif os.path.exists(model_secondary_path) and not check_model_SHA or model_secondary_downloaded == True:
     print('Secondary Model already downloaded, check check_model_SHA if the file is corrupt')
   else:  
     if argparse_args.setup:
-        get_ipython().system('wget --continue {model_secondary_link} -P {model_path}')
+        download_url(model_secondary_link, model_path, 'secondary_model_imagenet_2.pth')
     model_secondary_downloaded = True
 
 model_config = model_and_diffusion_defaults()
