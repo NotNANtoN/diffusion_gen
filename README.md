@@ -38,6 +38,27 @@ python3 diffuse.py --text "The meaning of life --gpu [Optional: device number of
 
 you can also set: `--out_name [Optional: set naming in your root_path according to this for better overview]` and `--sharpen_preset [Optional: set it to any of ('Off', 'Faster', 'Fast', 'Slow', 'Very Slow') to modify the sharpening process at the end. Default: Off]`
 
+
+## Setup for Windows
+See https://github.com/NotNANtoN/diffusion_gen/issues/1
+
+Instructions:
+- Install Anaconda
+- Create and activate a new environment (don't use base)
+- Install pytorch via their web code, using pip (not conda)
+- Install iPython
+- Add the forge channel to anaconda
+- conda config --add channels conda-forge
+- Install dependency packages using conda (for those available), otherwise use pip. Packages of relevance: OpenCV, pandas, timm, lpips, requests, pytorch-lightning, and omegaconf. There might be one or two others.
+- Run ipython diffuse.py
+- If it goes all the way, congrats. If you hit the SSL errors, open diffuse.py and add the following lines to the top of diffuse.py to the top (I did it around line 7.):
+ ```
+ import ssl
+ ssl._create_default_https_context = ssl._create_unverified_context
+ ```
+- If you get Frame Prompt: [''] and a failed output, make sure you're using python3 to run diffuse.py and not iPython :)
+- If you get a CUDA out of memory warning, pass a lower res like --width 720 --height 480 when you run
+
 ## Tutorial (copypasta from old colab notebook)
 
 ### **Diffusion settings**
