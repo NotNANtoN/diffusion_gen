@@ -36,12 +36,13 @@ Use it like this:
 ```
 python3 diffuse.py --text "The meaning of life --gpu [Optional: device number of GPU to run this on] --root_path [Optional: path to output folder, default is "out_diffusion" in local dir]
 ```
+If you only have 8 GB VRAM on your GPU, the highest resolution you can use run is 832x512, or 896x448. Set it by adding `--width 832 --height 512` for example. Thanks @Jotunblood for testing! 
 
 you can also set: `--out_name [Optional: set naming in your root_path according to this for better overview]` and `--sharpen_preset [Optional: set it to any of ('Off', 'Faster', 'Fast', 'Slow', 'Very Slow') to modify the sharpening process at the end. Default: Off]`
 
 
 ## Setup for Windows
-See https://github.com/NotNANtoN/diffusion_gen/issues/1
+See https://github.com/NotNANtoN/diffusion_gen/issues/1, the instructions from @JotunBlood are adopted here.
 
 Instructions:
 - Install Anaconda
