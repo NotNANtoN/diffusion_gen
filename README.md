@@ -25,6 +25,7 @@ With defaults settings it takes 07:46 minutes on an RTX 2080TI, 19:01 minutes on
 
 
 ## Setup
+If you're using Windows, please also refer to the section below called `Setup for Windows`!
 
 First run `ipython3 diffuse.py` to set everything up and to clone the repositories. IMPORTANT: you need to use ipython instead of python because I was lazy and all git clone etc are run via ipython
 
@@ -35,8 +36,30 @@ Use it like this:
 ```
 python3 diffuse.py --text "The meaning of life --gpu [Optional: device number of GPU to run this on] --root_path [Optional: path to output folder, default is "out_diffusion" in local dir]
 ```
+If you only have 8 GB VRAM on your GPU, the highest resolution you can use run is 832x512, or 896x448. Set it by adding `--width 832 --height 512` for example. Thanks @Jotunblood for testing! 
 
 you can also set: `--out_name [Optional: set naming in your root_path according to this for better overview]` and `--sharpen_preset [Optional: set it to any of ('Off', 'Faster', 'Fast', 'Slow', 'Very Slow') to modify the sharpening process at the end. Default: Off]`
+
+
+## Setup for Windows
+See https://github.com/NotNANtoN/diffusion_gen/issues/1, the instructions from @JotunBlood are adopted here.
+
+Instructions:
+- Install Anaconda
+- Create and activate a new environment (don't use base)
+- Install pytorch via their web code, using pip (not conda)
+- Install iPython
+- Add the forge channel to anaconda
+- conda config --add channels conda-forge
+- Install dependency packages using conda (for those available), otherwise use pip. Packages of relevance: OpenCV, pandas, timm, lpips, requests, pytorch-lightning, and omegaconf. There might be one or two others.
+- Run ipython diffuse.py
+- If it goes all the way, congrats. If you hit the SSL errors, open diffuse.py and add the following lines to the top of diffuse.py to the top (I did it around line 7.):
+ ```
+ import ssl
+ ssl._create_default_https_context = ssl._create_unverified_context
+ ```
+- If you get Frame Prompt: [''] and a failed output, make sure you're using python3 to run diffuse.py and not iPython :)
+- If you get a CUDA out of memory warning, pass a lower res like --width 720 --height 480 when you run
 
 ## Tutorial (copypasta from old colab notebook)
 

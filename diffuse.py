@@ -35,9 +35,7 @@ else:
 os.environ["CUDA_VISIBLE_DEVICES"] = argparse_args.gpu
 
 if argparse_args.setup:
-    get_ipython().system('python3 -m pip install ipywidgets omegaconf>=2.0.0 pytorch-lightning>=1.0.8 torch-fidelity einops wandb')
-    get_ipython().system('python3 -m pip install lpips datetime timm')
-    
+    get_ipython().system('python3 -m pip install torch lpips datetime timm ipywidgets omegaconf>=2.0.0 pytorch-lightning>=1.0.8 torch-fidelity einops wandb')    
     get_ipython().system('git clone https://github.com/CompVis/latent-diffusion.git')
     get_ipython().system('git clone https://github.com/openai/CLIP')
     get_ipython().system('pip3 install -e ./CLIP')
