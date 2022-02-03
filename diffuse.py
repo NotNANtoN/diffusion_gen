@@ -20,6 +20,9 @@ parser.add_argument("--out_name", default="out_image", type=str)
 parser.add_argument("--sharpen_preset", default="Off", type=str, choices=['Off', 'Faster', 'Fast', 'Slow', 'Very Slow'])
 parser.add_argument("--width", default=1280, type=int)
 parser.add_argument("--height", default=768, type=int)
+parser.add_argument("--init_image", default=None, type=str)
+parser.add_argument("--steps", default=250, type=int)
+parser.add_argument("--skip_steps", default=None, type=int)
 
     
 if run_from_ipython():
@@ -852,7 +855,7 @@ def make_convolutional_sample(batch, model, mode="vanilla", custom_steps=None, e
     return log
 
 sr_diffMode = 'superresolution'
-sr_model = get_model('superresolution')
+sr_model = get_model('superresolution') if argparse_args.sharpen_preset != "Off" else None
 
 
 def do_superres(img, filepath):
@@ -1122,7 +1125,7 @@ normalize = T.Normalize(mean=[0.48145466, 0.4578275, 0.40821073], std=[0.2686295
 
 #@markdown ####**Basic Settings:**
 batch_name = argparse_args.out_name #@param{type: 'string'}
-steps = 250 #@param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
+steps = argparse_args.steps #@param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
 width_height = [argparse_args.width, argparse_args.height]#@param{type: 'raw'}
 clip_guidance_scale = 5000 #@param{type: 'number'}
 tv_scale =  0#@param{type: 'number'}
@@ -1134,9 +1137,9 @@ skip_augs = False#@param{type: 'boolean'}
 #@markdown ---
 
 #@markdown ####**Init Settings:**
-init_image = None #@param{type: 'string'}
+init_image = argparse_args.init_image #@param{type: 'string'}
 init_scale = 1000 #@param{type: 'integer'}
-skip_steps = 0 #@param{type: 'integer'}
+skip_steps = argparse_args.skip_steps if argparse_args.skip_steps is not None else (steps // 2 if init_image is not None else 0)
 
 #Get corrected sizes
 side_x = (width_height[0]//64)*64;
