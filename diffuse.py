@@ -23,6 +23,7 @@ parser.add_argument("--height", default=768, type=int)
 parser.add_argument("--init_image", default=None, type=str)
 parser.add_argument("--steps", default=250, type=int)
 parser.add_argument("--skip_steps", default=None, type=int)
+parser.add_argument("--inter_saves", default=3, type=int)
 
     
 if run_from_ipython():
@@ -1407,7 +1408,7 @@ else:
 
 #@markdown ####**Saving:**
 
-intermediate_saves = 3#@param{type: 'raw'}
+intermediate_saves = argparse_args.inter_saves  #@param{type: 'raw'}
 intermediates_in_subfolder = True #@param{type: 'boolean'}
 #@markdown Intermediate steps will save a copy at your specified intervals. You can either format it as a single integer or a list of specific steps 
 
